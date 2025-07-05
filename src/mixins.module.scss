@@ -1,0 +1,99 @@
+$breakpoint-lg: 1536px;
+$breakpoint-xl: 1200px;
+$breakpoint-md: 900px;
+$breakpoint-sm: 600px;
+$breakpoint-xs: 300px;
+
+@mixin media($breakpoint) {
+  @if $breakpoint ==lg {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==xl {
+    @media (max-width: $breakpoint-xl) and (min-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==md {
+    @media (max-width: $breakpoint-md) and (min-width: $breakpoint-md) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==sm {
+    @media (max-width: $breakpoint-md) and (min-width: $breakpoint-sm) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==xs {
+    @media (max-width: $breakpoint-sm) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==xxs {
+    @media (max-width: $breakpoint-xs) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "Неизвестный брейкпоинт: #{$breakpoint}";
+  }
+}
+
+@mixin rootContainer {
+  @include media(lg) {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+    display: grid;
+    max-width: 1536px;
+  }
+
+  @include media(xl) {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+    display: grid;
+  }
+
+  @include media(md) {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+    display: grid;
+  }
+
+
+  @include media(sm) {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    display: grid;
+  }
+
+  @include media(xs) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    display: grid;
+  }
+
+  @include media(xxs) {
+    grid-template-columns: repeat(2, 1fr);  
+    gap: 4px;
+    display: grid;
+  }
+}
+
+@mixin gridContainer($columns: 12, $gap: 16px) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+
+@mixin gridItem($col-start: auto, $col-end: auto, $row-start: auto, $row-end: auto) {
+  grid-column: $col-start / $col-end;
+  grid-row: $row-start / $row-end;
+}
